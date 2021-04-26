@@ -25,7 +25,8 @@ namespace ArtDemic.Areas.Admin.Controllers
         }
         public IActionResult Index()
         {
-            return View(_db.Products.Include(c => c.ProductTypes).ToList());
+            var prods = _db.Products.ToList();
+            return View(prods);
         }
         public IActionResult Create()
         {
@@ -59,6 +60,7 @@ namespace ArtDemic.Areas.Admin.Controllers
         {
             return View();
         }
+
         [HttpPost]
         public IActionResult Edit(int? id, Products products)
         {
