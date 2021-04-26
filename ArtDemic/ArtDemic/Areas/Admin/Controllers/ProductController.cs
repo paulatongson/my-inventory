@@ -53,42 +53,28 @@ namespace ArtDemic.Areas.Admin.Controllers
             }
             return View(products);
         }
-        public ActionResult Edit (int? id)
+
+
+        public ActionResult Edit()
         {
-            ViewData["productTypeId"] = new SelectList(_db.ProductTypes.ToList(), "Id", "ProductType");
-            if (id == null)
-            {
-                return NotFound();
-            }
-            var product = _db.Products.Include(c => c.ProductTypes)
-                .FirstOrDefault(c => c.Id == id);
-            if (product == null)
-            {
-                return NotFound();
-            }
-            return View(product);
+            return View();
         }
         [HttpPost]
-        public async Task<IActionResult> Edit(Products products, IFormFile image)
+        public IActionResult Edit(int? id, Products products)
         {
-            if(ModelState.IsValid)
-            {
-                if (image != null)
-                {
-                    var name = Path.Combine(_he.WebRootPath + "/Images", Path.GetFileName(image.FileName));
-                    await image.CopyToAsync(new FileStream(name, FileMode.Create));
-                    products.Image = "Images/" + image.FileName;
-                }
-                if (image == null)
-                {
-                    products.Image = "Images/noimage.png";
-                }
-                _db.Products.Update(products);
-                await _db.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(products);
+            var prod = _db.Products.Where(i => i.Id == id).SingleOrDefault();
 
+            prod.Image = "Images/noimage.png";
+            prod.IsAvailable = products.IsAvailable;
+            prod.Name = products.Name;
+            prod.Price = products.Price;
+            prod.ProductTypeId = products.ProductTypeId;
+            prod.ProductTypes = products.ProductTypes;
+
+            _db.Products.Update(prod);
+            _db.SaveChanges();
+
+            return RedirectToAction("Index");
         }
 
        
