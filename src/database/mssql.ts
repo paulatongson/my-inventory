@@ -1,11 +1,11 @@
 import sql from "mssql";
 import { readFileSync } from "fs";
 
-const sqlConfig = {
-  user: "user",
-  password: "pass",
-  database: "tutorial",
-  server: "localhost",
+const sqlConfig = { 
+  user: "paulatongson",
+  password: "Ivana666tongson",
+  database: "artdemic",
+  server: "artdemic.database.windows.net",
   port: 1433,
   pool: {
     max: 10,
@@ -14,7 +14,7 @@ const sqlConfig = {
   },
   options: {
     encrypt: true, // for azure
-    trustServerCertificate: true, // change to true for local dev / self-signed certs
+    trustServerCertificate: false, // change to true for local dev / self-signed certs
   },
 };
 

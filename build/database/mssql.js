@@ -43,10 +43,10 @@ exports.initializeTables = exports.exeQuery = void 0;
 var mssql_1 = __importDefault(require("mssql"));
 var fs_1 = require("fs");
 var sqlConfig = {
-    user: "user",
-    password: "pass",
-    database: "tutorial",
-    server: "localhost",
+    user: "paulatongson",
+    password: "Ivana666tongson",
+    database: "artdemic",
+    server: "artdemic.database.windows.net",
     port: 1433,
     pool: {
         max: 10,
@@ -55,7 +55,7 @@ var sqlConfig = {
     },
     options: {
         encrypt: true,
-        trustServerCertificate: true, // change to true for local dev / self-signed certs
+        trustServerCertificate: false, // change to true for local dev / self-signed certs
     },
 };
 function exeQuery(query) {
