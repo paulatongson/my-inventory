@@ -85,32 +85,67 @@ router.get("/admin/addProduct", auth_1.auth, function (req, res, next) { return 
 }); });
 router.post("/admin/addProduct", auth_1.auth, function (req, res) {
     upload(req, res, function (error) { return __awaiter(void 0, void 0, void 0, function () {
-        var buffer;
+        var buffer, product;
         var _a;
         return __generator(this, function (_b) {
-            buffer = (_a = req.file) === null || _a === void 0 ? void 0 : _a.buffer;
-            res.send("I am a buffer, " + buffer);
-            return [2 /*return*/];
+            switch (_b.label) {
+                case 0:
+                    buffer = (_a = req.file) === null || _a === void 0 ? void 0 : _a.buffer;
+                    if (error instanceof multer_1.default.MulterError) {
+                        sendRender(res, 400, {
+                            notification: error.message + " - filesize limit " + fileSizeLimit,
+                        });
+                        return [2 /*return*/, null];
+                    }
+                    else if (error) {
+                        sendRender(res, 400, { notification: "" + error });
+                        res.status(400).send({ error: error });
+                        return [2 /*return*/, null];
+                    }
+                    return [4 /*yield*/, insertProducts(req.body)];
+                case 1:
+                    product = _b.sent();
+                    if (buffer instanceof Buffer) {
+                        try {
+                            createImage(buffer, product.ImgName, res);
+                        }
+                        catch (error) {
+                            res.status(500).send({ error: error });
+                            return [2 /*return*/];
+                        }
+                    }
+                    sendRender(res, 200, {
+                        categories: categories,
+                        notification: "Product sucessfully added",
+                    });
+                    return [2 /*return*/];
+            }
         });
     }); });
 });
 function sendRender(res, statusCode, renderObject) {
     res.status(statusCode).render("admin/addProduct", __assign({ productsSelected: "text-primary", addProduct: "text-primary", ordersSelected: "text-dark", inquiriesSelected: "text-dark", editDeleteProducts: "text-dark" }, renderObject));
 }
-function createImage(buffer, fileName) {
+function createImage(buffer, fileName, res) {
     var img = sharp_1.default(buffer);
-    var filePathAndName = "public/imgs/" + fileName;
-    img
-        .resize(1000, 1000, {
-        withoutEnlargement: true,
-        fit: "inside",
-    })
-        .webp()
-        .toFile(filePathAndName, function (err) {
-        if (err) {
-            throw err;
-        }
-    });
+    var filePathAndName = "/public/imgs/" + fileName;
+    try {
+        img
+            .resize(1000, 1000, {
+            withoutEnlargement: true,
+            fit: "inside",
+        })
+            .webp()
+            .toFile(filePathAndName, function (err) {
+            if (err) {
+                throw err;
+            }
+        });
+    }
+    catch (error) {
+        res.send(error);
+        return;
+    }
 }
 function insertProducts(insertObject) {
     return __awaiter(this, void 0, void 0, function () {

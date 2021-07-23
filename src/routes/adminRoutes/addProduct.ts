@@ -52,32 +52,31 @@ router.get(
 router.post("/admin/addProduct", auth, (req: RequestBody, res: Response) => {
   upload(req, res, async (error) => {
     const buffer = req.file?.buffer;
-    res.send(`I am a buffer, ${buffer}`)
-    // if (error instanceof multer.MulterError) {
-    //   sendRender(res, 400, {
-    //     notification: `${error.message} - filesize limit ${fileSizeLimit}`,
-    //   });
-    //   return null;
-    // } else if (error) {
-    //   sendRender(res, 400, { notification: `${error}` });
-    //   res.status(400).send({ error: error });
+    if (error instanceof multer.MulterError) {
+      sendRender(res, 400, {
+        notification: `${error.message} - filesize limit ${fileSizeLimit}`,
+      });
+      return null;
+    } else if (error) {
+      sendRender(res, 400, { notification: `${error}` });
+      res.status(400).send({ error: error });
 
-    //   return null;
-    // }
+      return null;
+    }
 
-    // const product = await insertProducts(req.body);
-    // if (buffer instanceof Buffer) {
-    //   try {
-    //     createImage(buffer, product.ImgName);
-    //   } catch (error) {
-    //     res.status(500).send({ error: error });
-    //     return;
-    //   }
-    // }
-    // sendRender(res, 200, {
-    //   categories: categories,
-    //   notification: "Product sucessfully added",
-    // });
+    const product = await insertProducts(req.body);
+    if (buffer instanceof Buffer) {
+      try {
+        createImage(buffer, product.ImgName, res);
+      } catch (error) {
+        res.status(500).send({ error: error });
+        return;
+      }
+    }
+    sendRender(res, 200, {
+      categories: categories,
+      notification: "Product sucessfully added",
+    });
   });
 });
 
@@ -92,20 +91,25 @@ function sendRender(res: Response, statusCode: number, renderObject: Object) {
   });
 }
 
-function createImage(buffer: Buffer, fileName: string) {
+function createImage(buffer: Buffer, fileName: string, res:Response) {
   const img = sharp(buffer);
-  const filePathAndName = `public/imgs/${fileName}`;
-  img
-    .resize(1000, 1000, {
-      withoutEnlargement: true,
-      fit: "inside",
-    })
-    .webp()
-    .toFile(filePathAndName, (err) => {
-      if (err) {
-        throw err;
-      }
-    });
+  const filePathAndName = `/public/imgs/${fileName}`;
+  try {
+    img
+      .resize(1000, 1000, {
+        withoutEnlargement: true,
+        fit: "inside",
+      })
+      .webp()
+      .toFile(filePathAndName, (err) => {
+        if (err) {
+          throw err;
+        }
+      });
+  } catch (error) {
+    res.send(error)
+    return
+  }
 }
 
 async function insertProducts(insertObject: InsertProduct) {
