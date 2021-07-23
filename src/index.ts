@@ -14,7 +14,7 @@ const staticDir = join(__dirname, "../public");
 initializeTables();
 
 const app = express();
-const { PORT = 3000 } = process.env;
+const PORT = process.env.PORT || 3000
 
 // Templates
 app.set("view engine", "hbs");

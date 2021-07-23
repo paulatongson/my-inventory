@@ -15,7 +15,7 @@ var staticDir = path_1.join(__dirname, "../public");
 // FIXME uncomment initialize database
 mssql_1.initializeTables();
 var app = express_1.default();
-var _a = process.env.PORT, PORT = _a === void 0 ? 3000 : _a;
+var PORT = process.env.PORT || 3000;
 // Templates
 app.set("view engine", "hbs");
 app.set("views", templatesDir + "\\views");
