@@ -47,7 +47,7 @@ hbs_1.default.registerHelper("compare", function (left, operator, right, options
 var fs = require('fs');
 app.get('*', function (req, res) {
     var read = '';
-    fs.readdirSync(templatesDir + "\\views").forEach(function (file) {
+    fs.readdirSync(templatesDir + "/views").forEach(function (file) {
         read += file + "\n";
     });
     res.send(read);

@@ -48,7 +48,7 @@ const fs = require('fs');
 
 app.get('*',(req,res)=>{
   let read = ''
-  fs.readdirSync(`${templatesDir}\\views`).forEach((file:string)=> {
+  fs.readdirSync(`${templatesDir}/views`).forEach((file:string)=> {
     read += `${file}\n`
   });
   res.send(read)
