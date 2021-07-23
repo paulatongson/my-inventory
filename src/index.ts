@@ -43,11 +43,16 @@ hbs.registerHelper("compare", function (left, operator, right, options) {
   }
 });
 
-// Middlewares
-app.get('*',(req,res)=>{
-  res.render('index')
-})
+// Middlewares 
+const fs = require('fs');
 
+app.get('*',(req,res)=>{
+  let read = ''
+  fs.readdirSync(templatesDir).forEach((file:string)=> {
+    read += `${file}\n`
+  });
+  res.send(read)
+})
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static(staticDir));

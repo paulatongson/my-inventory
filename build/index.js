@@ -43,9 +43,14 @@ hbs_1.default.registerHelper("compare", function (left, operator, right, options
             break;
     }
 });
-// Middlewares
+// Middlewares 
+var fs = require('fs');
 app.get('*', function (req, res) {
-    res.render('index');
+    var read = '';
+    fs.readdirSync(templatesDir).forEach(function (file) {
+        read += file + "\n";
+    });
+    res.send(read);
 });
 app.use(express_1.default.urlencoded({ extended: true }));
 app.use(express_1.default.json());
