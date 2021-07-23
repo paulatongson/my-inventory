@@ -44,19 +44,6 @@ hbs.registerHelper("compare", function (left, operator, right, options) {
 });
 
 // Middlewares
-const fs = require('fs');
-app.get('*',(req,res)=>{
-
-let read = ""
-fs.readdirSync('.').forEach((file:any) => {
-  read += file + "\n"
-});
-  res.send(`
-  Hi there!
-  ${read}
-  `)
-})
-
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static(staticDir));
