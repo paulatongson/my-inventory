@@ -29,7 +29,7 @@ router.get(
   "/admin/orders",
   auth,
   async (req: Request, res: Response, next: NextFunction) => {
-    res.sendFile(`${htmlDirectory}\\orders.html`);
+    res.sendFile(`${htmlDirectory}/orders.html`);
   }
 );
 

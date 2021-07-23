@@ -49,7 +49,7 @@ var router = express_1.Router();
 exports.router = router;
 router.get("/admin/inquiries", auth_1.auth, function (req, res, next) {
     mssql_1.exeQuery("");
-    res.sendFile(htmlDirectory + "\\inquiries.html");
+    res.sendFile(htmlDirectory + "/inquiries.html");
 });
 router.get("/api/admin/inquiries", auth_1.auth, function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
     var data, recordset;

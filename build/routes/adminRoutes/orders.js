@@ -65,7 +65,7 @@ var router = express_1.Router();
 exports.router = router;
 router.get("/admin/orders", auth_1.auth, function (req, res, next) { return __awaiter(void 0, void 0, void 0, function () {
     return __generator(this, function (_a) {
-        res.sendFile(htmlDirectory + "\\orders.html");
+        res.sendFile(htmlDirectory + "/orders.html");
         return [2 /*return*/];
     });
 }); });

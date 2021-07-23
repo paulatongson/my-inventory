@@ -25,17 +25,17 @@ interface RequestBody extends Request {
 }
 
 router.get("/shop", (req: Request, res: Response) => {
-  res.sendFile(`${htmlDirectory}\\shop.html`);
+  res.sendFile(`${htmlDirectory}/shop.html`);
 });
 router.get("/shop/artworks", (req: Request, res: Response) => {
-  res.sendFile(`${htmlDirectory}\\artworks.html`);
+  res.sendFile(`${htmlDirectory}/artworks.html`);
 });
 router.get("/shop/materials", (req: Request, res: Response) => {
-  res.sendFile(`${htmlDirectory}\\materials.html`);
+  res.sendFile(`${htmlDirectory}/materials.html`);
 });
 
 router.get("/cart", (req: Request, res: Response) => {
-  res.sendFile(`${htmlDirectory}\\cart.html`);
+  res.sendFile(`${htmlDirectory}/cart.html`);
 });
 
 router.post("/api/cart", async (req: RequestBody, res: Response) => {

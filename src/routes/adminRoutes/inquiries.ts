@@ -18,7 +18,7 @@ router.get(
   auth,
   (req: Request, res: Response, next: NextFunction) => {
     exeQuery("");
-    res.sendFile(`${htmlDirectory}\\inquiries.html`);
+    res.sendFile(`${htmlDirectory}/inquiries.html`);
   }
 );
 

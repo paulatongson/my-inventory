@@ -47,16 +47,16 @@ var router = express_1.Router();
 exports.router = router;
 var htmlDirectory = path_1.default.join(__dirname, "../../public/html");
 router.get("/shop", function (req, res) {
-    res.sendFile(htmlDirectory + "\\shop.html");
+    res.sendFile(htmlDirectory + "/shop.html");
 });
 router.get("/shop/artworks", function (req, res) {
-    res.sendFile(htmlDirectory + "\\artworks.html");
+    res.sendFile(htmlDirectory + "/artworks.html");
 });
 router.get("/shop/materials", function (req, res) {
-    res.sendFile(htmlDirectory + "\\materials.html");
+    res.sendFile(htmlDirectory + "/materials.html");
 });
 router.get("/cart", function (req, res) {
-    res.sendFile(htmlDirectory + "\\cart.html");
+    res.sendFile(htmlDirectory + "/cart.html");
 });
 router.post("/api/cart", function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
     var _a, ContactName, MobileNumber, EmailAdd, Address, orders, createContact, insertContactAffected, getNewContact, newContactRecord, createOrder, insertOrderAffected, getNewOrder, newOrderRecord, mappedOrders, error_1;
