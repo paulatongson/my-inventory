@@ -14,7 +14,7 @@ const staticDir = join(__dirname, "..", "public");
 initializeTables();
 
 const app = express();
-const { PORT } = process.env;
+const { PORT = 3000 } = process.env;
 
 // Templates
 app.set("view engine", "hbs");
@@ -49,4 +49,4 @@ app.use(express.json());
 app.use(express.static(staticDir));
 app.use(router);
 
-app.listen(PORT || 3000, () => console.log(`Running on PORT ${PORT}`));
+app.listen(PORT, () => console.log(`Running on PORT ${PORT}`));
