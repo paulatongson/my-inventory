@@ -5,8 +5,8 @@ import { join } from "path";
 import { router } from "./app";
 
 // Dirs
-const templatesDir = join(__dirname, "..", "templates");
-const staticDir = join(__dirname, "..", "public");
+const templatesDir = join(__dirname, "../templates");
+const staticDir = join(__dirname, "../public");
 
 // Initialize 
 

@@ -9,8 +9,8 @@ var mssql_1 = require("./database/mssql");
 var path_1 = require("path");
 var app_1 = require("./app");
 // Dirs
-var templatesDir = path_1.join(__dirname, "..", "templates");
-var staticDir = path_1.join(__dirname, "..", "public");
+var templatesDir = path_1.join(__dirname, "../templates");
+var staticDir = path_1.join(__dirname, "../public");
 // Initialize 
 // FIXME uncomment initialize database
 mssql_1.initializeTables();
