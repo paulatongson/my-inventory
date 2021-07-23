@@ -8,8 +8,7 @@ import { router } from "./app";
 const templatesDir = join(__dirname, "..", "templates");
 const staticDir = join(__dirname, "..", "public");
 
-// Initialize
-process.env.PORT = "3000";
+// Initialize 
 
 // FIXME uncomment initialize database
 initializeTables();
@@ -50,4 +49,4 @@ app.use(express.json());
 app.use(express.static(staticDir));
 app.use(router);
 
-app.listen(PORT, () => console.log(`Running on PORT ${PORT}`));
+app.listen(PORT || 3000, () => console.log(`Running on PORT ${PORT}`));

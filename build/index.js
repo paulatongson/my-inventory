@@ -11,8 +11,7 @@ var app_1 = require("./app");
 // Dirs
 var templatesDir = path_1.join(__dirname, "..", "templates");
 var staticDir = path_1.join(__dirname, "..", "public");
-// Initialize
-process.env.PORT = "3000";
+// Initialize 
 // FIXME uncomment initialize database
 mssql_1.initializeTables();
 var app = express_1.default();
@@ -49,4 +48,4 @@ app.use(express_1.default.urlencoded({ extended: true }));
 app.use(express_1.default.json());
 app.use(express_1.default.static(staticDir));
 app.use(app_1.router);
-app.listen(PORT, function () { return console.log("Running on PORT " + PORT); });
+app.listen(PORT || 3000, function () { return console.log("Running on PORT " + PORT); });
