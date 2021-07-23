@@ -85,41 +85,12 @@ router.get("/admin/addProduct", auth_1.auth, function (req, res, next) { return 
 }); });
 router.post("/admin/addProduct", auth_1.auth, function (req, res) {
     upload(req, res, function (error) { return __awaiter(void 0, void 0, void 0, function () {
-        var buffer, product;
+        var buffer;
         var _a;
         return __generator(this, function (_b) {
-            switch (_b.label) {
-                case 0:
-                    buffer = (_a = req.file) === null || _a === void 0 ? void 0 : _a.buffer;
-                    if (error instanceof multer_1.default.MulterError) {
-                        sendRender(res, 400, {
-                            notification: error.message + " - filesize limit " + fileSizeLimit,
-                        });
-                        return [2 /*return*/, null];
-                    }
-                    else if (error) {
-                        sendRender(res, 400, { notification: "" + error });
-                        res.status(400).send({ error: error });
-                        return [2 /*return*/, null];
-                    }
-                    return [4 /*yield*/, insertProducts(req.body)];
-                case 1:
-                    product = _b.sent();
-                    if (buffer instanceof Buffer) {
-                        try {
-                            createImage(buffer, product.ImgName);
-                        }
-                        catch (error) {
-                            res.status(500).send({ error: error });
-                            return [2 /*return*/];
-                        }
-                    }
-                    sendRender(res, 200, {
-                        categories: categories,
-                        notification: "Product sucessfully added",
-                    });
-                    return [2 /*return*/];
-            }
+            buffer = (_a = req.file) === null || _a === void 0 ? void 0 : _a.buffer;
+            res.send("I am a buffer, " + buffer);
+            return [2 /*return*/];
         });
     }); });
 });
