@@ -18,8 +18,8 @@ const PORT = process.env.PORT || 3000
 
 // Templates
 app.set("view engine", "hbs");
-app.set("views", `${templatesDir}\\views`);
-hbs.registerPartials(`${templatesDir}\\partials`);
+app.set("views", `${templatesDir}/views`);
+hbs.registerPartials(`${templatesDir}/partials`);
 
 hbs.registerHelper("compare", function (left, operator, right, options) {
   switch (operator) {
@@ -44,15 +44,6 @@ hbs.registerHelper("compare", function (left, operator, right, options) {
 });
 
 // Middlewares 
-const fs = require('fs');
-
-app.get('*',(req,res)=>{
-  let read = ''
-  fs.readdirSync(`${templatesDir}/views`).forEach((file:string)=> {
-    read += `${file}\n`
-  });
-  res.send(read)
-})
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static(staticDir));

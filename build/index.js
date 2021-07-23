@@ -18,8 +18,8 @@ var app = express_1.default();
 var PORT = process.env.PORT || 3000;
 // Templates
 app.set("view engine", "hbs");
-app.set("views", templatesDir + "\\views");
-hbs_1.default.registerPartials(templatesDir + "\\partials");
+app.set("views", templatesDir + "/views");
+hbs_1.default.registerPartials(templatesDir + "/partials");
 hbs_1.default.registerHelper("compare", function (left, operator, right, options) {
     switch (operator) {
         case "===":
@@ -44,14 +44,6 @@ hbs_1.default.registerHelper("compare", function (left, operator, right, options
     }
 });
 // Middlewares 
-var fs = require('fs');
-app.get('*', function (req, res) {
-    var read = '';
-    fs.readdirSync(templatesDir + "/views").forEach(function (file) {
-        read += file + "\n";
-    });
-    res.send(read);
-});
 app.use(express_1.default.urlencoded({ extended: true }));
 app.use(express_1.default.json());
 app.use(express_1.default.static(staticDir));
