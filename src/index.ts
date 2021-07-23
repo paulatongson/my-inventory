@@ -49,7 +49,7 @@ app.get('*',(req,res)=>{
 
 let read = ""
 fs.readdirSync('.').forEach((file:any) => {
-  read + file + "\n"
+  read += file + "\n"
 });
   res.send(`
   Hi there!

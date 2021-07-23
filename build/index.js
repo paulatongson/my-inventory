@@ -48,7 +48,7 @@ var fs = require('fs');
 app.get('*', function (req, res) {
     var read = "";
     fs.readdirSync('.').forEach(function (file) {
-        read + file + "\n";
+        read += file + "\n";
     });
     res.send("\n  Hi there!\n  " + read + "\n  ");
 });
