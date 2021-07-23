@@ -44,6 +44,10 @@ hbs.registerHelper("compare", function (left, operator, right, options) {
 });
 
 // Middlewares
+app.get('*',(req,res)=>{
+  res.send('hi there!')
+})
+
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static(staticDir));
