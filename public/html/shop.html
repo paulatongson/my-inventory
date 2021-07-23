@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/angular@1.8.2/angular.js"></script>
+
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
+    />
+    <link rel="stylesheet" href="/css/style.css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
+    <script src="/js/shop.js"></script>
+
+    <base href="/" />
+    <title>Shop</title>
+  </head>
+  <body ng-app="app" ng-controller="index">
+    <a
+      href="/cart"
+      class="text-dark m-5"
+      style="font-size: 5rem; position: fixed; bottom: 83%; right: 0"
+    >
+      <i class="bi bi-cart4"></i>
+    </a>
+    <section class="d-flex justify-content-center" id="shop-index">
+      <ul class="nav">
+        <li class="nav-item">
+          <a class="nav-link" href="/shop/artworks">Artworks</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/shop/materials">Materials</a>
+        </li>
+      </ul>
+    </section>
+  </body>
+</html>

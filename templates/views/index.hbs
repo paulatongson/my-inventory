@@ -1,0 +1,157 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      @import
+      url('https://fonts.googleapis.com/css2?family=Lora:wght@500&family=Roboto+Condensed&family=Roboto+Slab&display=swap');
+    </style>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"
+      integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <title>ArtDemic</title>
+  </head>
+  <body>
+    <a
+      href="/cart"
+      class="text-dark m-5"
+      style="font-size: 5rem; 
+      position: fixed;
+      bottom: 83%;
+      right: 0;"
+    >
+      <i class="bi bi-cart4"></i>
+    </a>
+
+    <section class="d-flex justify-content-center align-items-center" id="home">
+      <h1>
+        <ul class="nav">
+          <li class="mx-3 nav-item"><a
+              class="nav-link"
+              href="/shop"
+            >shop.</a></li>
+          <li class="mx-3 nav-item"><a
+              class="nav-link"
+              href="/#about"
+            >about.</a></li>
+          <li class="mx-3 nav-item"><a
+              class="nav-link"
+              href="/#contact"
+            >contact.</a></li>
+          <li class="mx-3 nav-item"><a
+              class="nav-link"
+              href="/#faqs"
+            >faqs.</a></li>
+        </ul>
+      </h1>
+    </section>
+    <section id="about" class="container text-center">
+
+      <h1>what is </h1>
+      <h1 class="text-info">artdemic?</h1>
+      <p class="my-3">ARTDEMIC IS AN ONLINE SHOP WHICH CATERS ART SUPPLIES,
+        ESPECIALLY TO THOSE PEOPLE WHO ARE NOT ALLOWED TO GO OUT DUE TO THE
+        PANDEMIC. ALSO, ARTISTS ARE ALSO ENCOURAGED TO SEND US THEIR ARTWORK AND
+        WE WILL SELL IT HERE ON OUR WEBSITE.</p>
+      <p class="my-3">OUR SHOP DO NOT JUST FOCUS ON
+        <span class="text-info">SELLING ART MATERIALS,</span>
+        BUT ALSO ON
+        <span class="text-info">
+          PROMOTING OUR TALENTED LOCAL ARTISTS BY SHOWCASING THEIR ART.</span></p>
+
+    </section>
+    <section id="contact">
+      <div class="m-5 d-flex justify-content-center">
+        <h1>contact <span class="text-info">us</span></h1>
+      </div>
+      <div class="container">
+        <div class="row gap-3">
+          <input
+            type="text"
+            name="Name"
+            class="form-control border border-info rounded col-12 mx-auto"
+            placeholder="Name"
+          />
+          <input
+            type="text"
+            name="Subject"
+            class="form-control border border-info rounded col-12 mx-auto"
+            placeholder="Subject"
+          />
+          <input
+            type="text"
+            name="MobileNumber"
+            class="form-control border border-info rounded col-12 mx-auto"
+            placeholder="Contact No."
+          />
+          <input
+            type="text"
+            name="EmailAdd"
+            class="form-control border border-info rounded col-12 mx-auto"
+            placeholder="Email"
+          />
+          <textarea
+            name="Comments"
+            class="form-control border border-info col-12 mx-auto"
+            placeholder="Comments/Inquiries/Concerns"
+          ></textarea>
+          <div class="d-flex justify-content-end mx-auto">
+            <button class="btn btn-dark">SUBMIT</button>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="faqs" class="text-center container">
+      <h1 class="my-5">FAQs, & Guidelines</h1>
+      <h2 class="mt-5">1.WHAT ARE YOUR PAYMENT METHODS?</h2>
+      <p>CURRENTLY, WE ONLY ACCEPT PAYMENTS VIA CASH-ON-DELIVERY.
+      </p>
+      <h2 class="mt-5">2.HOW ABOUT SAME DAY DELIVERY?</h2>
+      <p>GRAB, LALAMOVE, OR ANY KIND OF SAME DAY DELIVERY ARE NOT AVAILABLE. WE
+        ONLY SHIP PRODUCTS VIA JRS DELIVERY</p>
+    </section>
+    <section id="featured">
+      <h1 class="d-flex justify-content-center p-5">
+        featured artworks
+      </h1>
+      {{#if featuredArtwork.ImgName}}
+        <div class="container">
+          <div class="row">
+            <div class="col-12 col-md-6">
+              <img
+                src="/imgs/{{featuredArtwork.ImgName}}"
+                alt="{{featuredArtwork.Name}}"
+                id="featuredArtworkImg"
+              />
+            </div>
+            <div class="col-12 col-md-6 text-center">
+              <h1>{{featuredArtwork.Name}}</h1>
+              <p>{{featuredArtwork.Description}}</p>
+            </div>
+          </div>
+        </div>
+      {{/if}}
+    </section>
+    <script src="/js/index.js"></script>
+  </body>
+</html>

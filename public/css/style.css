@@ -1,0 +1,118 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body,
+html {
+  min-height: 100%;
+}
+section {
+  min-height: 100%;
+}
+
+li {
+  list-style-type: none;
+}
+
+a {
+  text-decoration: inherit;
+  color: inherit;
+  font-size: 4rem;
+}
+
+#about {
+  font-size: 2.5rem;
+  padding: 4rem;
+}
+
+#about h1,
+#faqs > h1,
+#featured > h1 {
+  font-family: "Lora", serif;
+  font-size: 4rem;
+}
+
+#about,
+#contact h1 {
+  font-family: "Roboto Condensed", sans-serif;
+}
+
+#contact > div h1 {
+  font-size: 5rem;
+}
+
+#home {
+  padding-bottom: 20rem;
+}
+
+#shop-index {
+  padding-top: 10rem;
+}
+
+#shop-nav {
+  margin: 2rem 0;
+}
+
+#artworks-row {
+  min-height: 42rem;
+}
+
+#artworks-row > div.card > img {
+  object-fit: contain;
+}
+
+#artworks-row > .card {
+  margin: 0 2rem;
+  border: 0;
+  width: auto;
+}
+
+#featuredArtworkImg {
+  max-height: 100%;
+  width: 100%;
+  object-fit: contain;
+}
+
+#featuredArtworkImg > .container > .row > .col {
+  max-height: 50rem;
+}
+
+#contact {
+  font-family: "Lora", serif;
+  padding: 2rem;
+}
+
+#contact input {
+  width: 45rem;
+  border-width: 7px !important;
+  border-radius: 15px !important;
+}
+
+#contact > .container > .row .d-flex {
+  width: 45rem;
+}
+#contact textarea {
+  height: 30vh;
+  width: 45rem;
+  border-width: 7px !important;
+  border-radius: 15px !important;
+}
+
+#contact .container {
+  height: 90%;
+}
+
+#faqs {
+  padding: 5rem;
+}
+
+#featured,
+#faqs p {
+  font-family: "Roboto Condensed", sans-serif;
+}
+
+#faqs p {
+  font-size: 2rem;
+}

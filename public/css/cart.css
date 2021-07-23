@@ -1,0 +1,9 @@
+#border-top {
+  border-top-width: thick;
+  border-top-color: black;
+}
+
+input[type="number"] {
+  width: 5rem;
+  height: 2rem;
+}

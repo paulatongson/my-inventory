@@ -1,0 +1,10 @@
+div.d-flex > ul.nav > li.nav-item > a.nav-link {
+  font-size: 4rem;
+}
+div.d-flex > ul.nav > li.nav-item {
+  margin: 0 2rem;
+}
+
+#index {
+  margin-top: 15%;
+}

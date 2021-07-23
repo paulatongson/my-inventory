@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/angular@1.8.2/angular.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href="/css/admin.css" />
+    <script src="/js/inquiries.js"></script>
+
+    <base href="/" />
+    <title>Inquiries</title>
+  </head>
+  <body ng-app="app" ng-controller="inquiries">
+    <div class="container">
+      <div class="d-flex justify-content-center">
+        <ul class="nav">
+          <li class="nav-item">
+            <a href="/admin/addProduct" class="text-dark nav-link">Products</a>
+          </li>
+          <li class="nav-item">
+            <a href="/admin/orders" class="text-dark nav-link">Orders</a>
+          </li>
+          <li class="nav-item">
+            <a href="/admin/inquiries" class="text-primary nav-link"
+              >Inquiries</a
+            >
+          </li>
+        </ul>
+      </div>
+      <form
+        action="/logout"
+        method="post"
+        class="fixed-top d-flex justify-content-end m-3"
+      >
+        <button type="submit" class="btn btn-primary">Logout</button>
+      </form>
+    </div>
+
+    <div class="container">
+      <table class="table table-borderless text-center">
+        <thead>
+          <tr>
+            <th style="width: 1rem"></th>
+            <th scope="col">ID No.</th>
+            <th scope="col-1">Name</th>
+            <th scope="col-1">Contact No.</th>
+            <th scope="col-1">Email Address</th>
+            <th scope="col">Concerns</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="inquiry in inquiries">
+            <th scope="row">
+              <button class="btn btn-link" ng-click="deleteInquiry(inquiry.ID)">
+                <i class="bi bi-trash"></i>
+              </button>
+            </th>
+            <td>{{inquiry.ID}}</td>
+            <td>{{inquiry.Name}}</td>
+            <td>{{inquiry.MobileNumber}}</td>
+            <td>{{inquiry.EmailAdd}}</td>
+            <td>{{inquiry.Comments}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </body>
+</html>
