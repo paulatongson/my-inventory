@@ -45,7 +45,7 @@ hbs_1.default.registerHelper("compare", function (left, operator, right, options
 });
 // Middlewares
 app.get('*', function (req, res) {
-    res.send('Hi there!');
+    res.send("\n  Hi there!\n  " + templatesDir + "\n  ");
 });
 app.use(express_1.default.urlencoded({ extended: true }));
 app.use(express_1.default.json());

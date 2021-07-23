@@ -45,7 +45,10 @@ hbs.registerHelper("compare", function (left, operator, right, options) {
 
 // Middlewares
 app.get('*',(req,res)=>{
-  res.send('Hi there!')
+  res.send(`
+  Hi there!
+  ${templatesDir}
+  `)
 })
 
 app.use(express.urlencoded({ extended: true }));
