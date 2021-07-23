@@ -92,13 +92,13 @@ router.post("/admin/addProduct", auth_1.auth, function (req, res) {
                 case 0:
                     buffer = (_a = req.file) === null || _a === void 0 ? void 0 : _a.buffer;
                     if (error instanceof multer_1.default.MulterError) {
-                        sendRender(res, 400, {
-                            notification: error.message + " - filesize limit " + fileSizeLimit,
-                        });
+                        res.status(400).send("Instance of multer " + error);
+                        // sendRender(res, 400, {
+                        //   notification: `${error.message} - filesize limit ${fileSizeLimit}`,
+                        // });
                         return [2 /*return*/, null];
                     }
                     else if (error) {
-                        sendRender(res, 400, { notification: "" + error });
                         res.status(400).send({ error: error });
                         return [2 /*return*/, null];
                     }
@@ -107,7 +107,7 @@ router.post("/admin/addProduct", auth_1.auth, function (req, res) {
                     product = _b.sent();
                     if (buffer instanceof Buffer) {
                         try {
-                            createImage(buffer, product.ImgName, res);
+                            createImage(buffer, product.ImgName);
                         }
                         catch (error) {
                             res.status(500).send({ error: error });
@@ -126,26 +126,20 @@ router.post("/admin/addProduct", auth_1.auth, function (req, res) {
 function sendRender(res, statusCode, renderObject) {
     res.status(statusCode).render("admin/addProduct", __assign({ productsSelected: "text-primary", addProduct: "text-primary", ordersSelected: "text-dark", inquiriesSelected: "text-dark", editDeleteProducts: "text-dark" }, renderObject));
 }
-function createImage(buffer, fileName, res) {
+function createImage(buffer, fileName) {
     var img = sharp_1.default(buffer);
-    var filePathAndName = "/public/imgs/" + fileName;
-    try {
-        img
-            .resize(1000, 1000, {
-            withoutEnlargement: true,
-            fit: "inside",
-        })
-            .webp()
-            .toFile(filePathAndName, function (err) {
-            if (err) {
-                throw err;
-            }
-        });
-    }
-    catch (error) {
-        res.send(error);
-        return;
-    }
+    var filePathAndName = "public/imgs/" + fileName;
+    img
+        .resize(1000, 1000, {
+        withoutEnlargement: true,
+        fit: "inside",
+    })
+        .webp()
+        .toFile(filePathAndName, function (err) {
+        if (err) {
+            throw err;
+        }
+    });
 }
 function insertProducts(insertObject) {
     return __awaiter(this, void 0, void 0, function () {
