@@ -44,10 +44,16 @@ hbs.registerHelper("compare", function (left, operator, right, options) {
 });
 
 // Middlewares
+const fs = require('fs');
 app.get('*',(req,res)=>{
+
+let read = ""
+fs.readdirSync('.').forEach((file:any) => {
+  read + file + "\n"
+});
   res.send(`
   Hi there!
-  ${templatesDir}
+  ${read}
   `)
 })
 

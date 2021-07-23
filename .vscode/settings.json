@@ -1,4 +1,4 @@
 {
-    "appService.defaultWebAppToDeploy": "/subscriptions/6413baa7-9ca6-4765-8f9f-183ac4b26aae/resourceGroups/ArtDemic/providers/Microsoft.Web/sites/artdemic",
-    "appService.deploySubpath": "."
+    "appService.deploySubpath": ".",
+    "appService.defaultWebAppToDeploy": "/subscriptions/6413baa7-9ca6-4765-8f9f-183ac4b26aae/resourceGroups/appsvc_linux_centralus/providers/Microsoft.Web/sites/artdemic"
 }
