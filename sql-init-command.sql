@@ -27,7 +27,7 @@ IF OBJECT_ID(N'admin', N'U') IS NULL
         MobileNumber NVARCHAR(128) DEFAULT NULL,
         EmailAdd NVARCHAR(128) DEFAULT NULL,
         Address NVARCHAR(128) DEFAULT NULL,
-        Comments NVARCHAR(128) DEFAULT NULL
+        Comments NVARCHAR(MAX) DEFAULT NULL
     )
     
     CREATE TABLE [Orders] (

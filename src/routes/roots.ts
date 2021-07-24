@@ -72,7 +72,7 @@ router.post("/", async (req: RequestBodyContactUs, res: Response) => {
   const { Name, Subject, MobileNumber, EmailAdd, Comments } = req.body;
   const response = await exeQuery(`
   INSERT INTO  ContactUs ( Name, Subject, MobileNumber, EmailAdd, Comments)  
-  values (N'${Name}', N'${Subject}', N'${MobileNumber}', N'${EmailAdd}', '${Comments}')
+  values (N'${Name}', N'${Subject}', N'${MobileNumber}', N'${EmailAdd}', N'${Comments}')
   `);
   if (response.rowsAffected.length > 0) {
     res.status(201).send();
