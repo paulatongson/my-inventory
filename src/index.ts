@@ -8,13 +8,13 @@ import { router } from "./app";
 const templatesDir = join(__dirname, "../templates");
 const staticDir = join(__dirname, "../public");
 
-// Initialize 
+// Initialize
 
 // FIXME uncomment initialize database
 initializeTables();
 
 const app = express();
-const PORT = process.env.PORT || 3000
+const PORT = process.env.PORT || "3000";
 
 // Templates
 app.set("view engine", "hbs");
@@ -43,9 +43,12 @@ hbs.registerHelper("compare", function (left, operator, right, options) {
   }
 });
 
-// Middlewares 
+// Middlewares
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.get("/imgs/:ImgName", (req, res) => {
+  res.sendFile(`d:/home/${req.params.ImgName}`);
+});
 app.use(express.static(staticDir));
 app.use(router);
 

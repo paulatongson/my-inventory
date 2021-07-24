@@ -17,7 +17,7 @@ a {
 }
 
 img {
-  max-height: 30rem;
+  max-height: 20rem;
   object-fit: contain;
 }
 
@@ -26,7 +26,7 @@ img {
 }
 
 .container {
-  min-height: 30rem;
+  min-height: 20rem;
 }
 
 #categories > li > a {

@@ -112,7 +112,7 @@ EDIT PRODUCTS BELOW
 */
 // this enables the file upload to become a buffer
 var storage = multer_1.default.memoryStorage();
-var fileSizeLimit = 1000000; // bytes
+var fileSizeLimit = 5000000; // bytes
 var upload = multer_1.default({
     storage: storage,
     limits: {
@@ -155,7 +155,7 @@ router.get("/admin/editDeleteProducts/:ProductID", auth_1.auth, function (req, r
 }); });
 router.post("/admin/editDeleteProducts/:ProductID", auth_1.auth, function (req, res) {
     upload(req, res, function (error) { return __awaiter(void 0, void 0, void 0, function () {
-        var ProductID, buffer, product, result, allProducts;
+        var ProductID, buffer, product, error_1, result, allProducts;
         var _a;
         return __generator(this, function (_b) {
             switch (_b.label) {
@@ -177,17 +177,20 @@ router.post("/admin/editDeleteProducts/:ProductID", auth_1.auth, function (req, 
                     return [4 /*yield*/, updateProducts(req.body)];
                 case 1:
                     product = _b.sent();
-                    if (buffer instanceof Buffer) {
-                        try {
-                            createImage(buffer, product.ImgName);
-                        }
-                        catch (error) {
-                            res.status(500).send({ error: error });
-                            return [2 /*return*/];
-                        }
-                    }
-                    return [4 /*yield*/, mssql_1.exeQuery("SELECT * FROM Products")];
+                    if (!(buffer instanceof Buffer)) return [3 /*break*/, 5];
+                    _b.label = 2;
                 case 2:
+                    _b.trys.push([2, 4, , 5]);
+                    return [4 /*yield*/, createImage(buffer, product.ImgName)];
+                case 3:
+                    _b.sent();
+                    return [3 /*break*/, 5];
+                case 4:
+                    error_1 = _b.sent();
+                    res.status(500).send({ error: error_1 });
+                    return [2 /*return*/];
+                case 5: return [4 /*yield*/, mssql_1.exeQuery("SELECT * FROM Products")];
+                case 6:
                     result = _b.sent();
                     allProducts = result.recordset;
                     sendRender(res, 200, {
@@ -205,18 +208,26 @@ function sendRender(res, statusCode, renderObject, handlebarPath) {
     res.status(statusCode).render(handlebarPath, __assign({ productsSelected: "text-primary", editDeleteProducts: "text-primary", addProduct: "text-dark", ordersSelected: "text-dark", inquiriesSelected: "text-dark" }, renderObject));
 }
 function createImage(buffer, fileName) {
-    var img = sharp_1.default(buffer);
-    var filePathAndName = "public/imgs/" + fileName;
-    img
-        .resize(1000, 1000, {
-        withoutEnlargement: true,
-        fit: "inside",
-    })
-        .webp()
-        .toFile(filePathAndName, function (err) {
-        if (err) {
-            throw err;
-        }
+    return __awaiter(this, void 0, void 0, function () {
+        var img, filePathAndName, bufferedSharp;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    img = sharp_1.default(buffer);
+                    filePathAndName = "d:/home/" + fileName;
+                    return [4 /*yield*/, img
+                            .resize(1000, 1000, {
+                            withoutEnlargement: true,
+                            fit: "inside",
+                        })
+                            .toFormat("webp")
+                            .toBuffer()];
+                case 1:
+                    bufferedSharp = _a.sent();
+                    fs_1.default.writeFileSync(filePathAndName, bufferedSharp);
+                    return [2 /*return*/];
+            }
+        });
     });
 }
 function updateProducts(insertObject) {

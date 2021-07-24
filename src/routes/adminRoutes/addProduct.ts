@@ -4,6 +4,7 @@ import multer from "multer";
 import sharp from "sharp";
 import { exeQuery } from "../../database/mssql";
 import { Product } from "./Product";
+import fs from "fs";
 
 const router = Router();
 
@@ -21,7 +22,7 @@ interface RequestBody extends Request {
 
 // this enables the file upload to become a buffer
 const storage = multer.memoryStorage();
-const fileSizeLimit = 1000000; // bytes
+const fileSizeLimit = 50000000; // bytes
 
 const upload = multer({
   storage: storage,
@@ -53,25 +54,30 @@ router.post("/admin/addProduct", auth, (req: RequestBody, res: Response) => {
   upload(req, res, async (error) => {
     const buffer = req.file?.buffer;
     if (error instanceof multer.MulterError) {
-      res.status(400).send(`Instance of multer ${error}`)
-      // sendRender(res, 400, {
-      //   notification: `${error.message} - filesize limit ${fileSizeLimit}`,
-      // });
+      sendRender(res, 400, {
+        notification: `${error.message} - filesize limit ${fileSizeLimit}`,
+        categories: categories,
+      });
       return null;
-    } else if (error) { 
-      res.status(400).send({ error: error }); 
+    } else if (error) {
+      sendRender(res, 400, {
+        notification: `${error}`,
+        categories: categories,
+      });
+
       return null;
     }
 
     const product = await insertProducts(req.body);
     if (buffer instanceof Buffer) {
       try {
-        createImage(buffer, product.ImgName);
+        await createImage(buffer, product.ImgName);
       } catch (error) {
         res.status(500).send({ error: error });
         return;
       }
     }
+
     sendRender(res, 200, {
       categories: categories,
       notification: "Product sucessfully added",
@@ -90,20 +96,17 @@ function sendRender(res: Response, statusCode: number, renderObject: Object) {
   });
 }
 
-function createImage(buffer: Buffer, fileName: string) {
+async function createImage(buffer: Buffer, fileName: string) {
   const img = sharp(buffer);
-  const filePathAndName = `public/imgs/${fileName}`;
-  img
+  const filePathAndName = `d:/home/${fileName}`;
+  const bufferedSharp = await img
     .resize(1000, 1000, {
       withoutEnlargement: true,
       fit: "inside",
     })
-    .webp()
-    .toFile(filePathAndName, (err) => {
-      if (err) {
-        throw err;
-      }
-    });
+    .toFormat("webp")
+    .toBuffer();
+  fs.writeFileSync(filePathAndName, bufferedSharp);
 }
 
 async function insertProducts(insertObject: InsertProduct) {

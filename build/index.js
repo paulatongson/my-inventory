@@ -11,11 +11,11 @@ var app_1 = require("./app");
 // Dirs
 var templatesDir = path_1.join(__dirname, "../templates");
 var staticDir = path_1.join(__dirname, "../public");
-// Initialize 
+// Initialize
 // FIXME uncomment initialize database
 mssql_1.initializeTables();
 var app = express_1.default();
-var PORT = process.env.PORT || 3000;
+var PORT = process.env.PORT || "3000";
 // Templates
 app.set("view engine", "hbs");
 app.set("views", templatesDir + "/views");
@@ -43,9 +43,12 @@ hbs_1.default.registerHelper("compare", function (left, operator, right, options
             break;
     }
 });
-// Middlewares 
+// Middlewares
 app.use(express_1.default.urlencoded({ extended: true }));
 app.use(express_1.default.json());
+app.get("/imgs/:ImgName", function (req, res) {
+    res.sendFile("d:/home/" + req.params.ImgName);
+});
 app.use(express_1.default.static(staticDir));
 app.use(app_1.router);
 app.listen(PORT, function () { return console.log("Running on PORT " + PORT); });

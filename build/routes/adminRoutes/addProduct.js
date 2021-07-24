@@ -56,11 +56,12 @@ var auth_1 = require("../auth");
 var multer_1 = __importDefault(require("multer"));
 var sharp_1 = __importDefault(require("sharp"));
 var mssql_1 = require("../../database/mssql");
+var fs_1 = __importDefault(require("fs"));
 var router = express_1.Router();
 exports.router = router;
 // this enables the file upload to become a buffer
 var storage = multer_1.default.memoryStorage();
-var fileSizeLimit = 1000000; // bytes
+var fileSizeLimit = 50000000; // bytes
 var upload = multer_1.default({
     storage: storage,
     limits: {
@@ -85,35 +86,42 @@ router.get("/admin/addProduct", auth_1.auth, function (req, res, next) { return 
 }); });
 router.post("/admin/addProduct", auth_1.auth, function (req, res) {
     upload(req, res, function (error) { return __awaiter(void 0, void 0, void 0, function () {
-        var buffer, product;
+        var buffer, product, error_1;
         var _a;
         return __generator(this, function (_b) {
             switch (_b.label) {
                 case 0:
                     buffer = (_a = req.file) === null || _a === void 0 ? void 0 : _a.buffer;
                     if (error instanceof multer_1.default.MulterError) {
-                        res.status(400).send("Instance of multer " + error);
-                        // sendRender(res, 400, {
-                        //   notification: `${error.message} - filesize limit ${fileSizeLimit}`,
-                        // });
+                        sendRender(res, 400, {
+                            notification: error.message + " - filesize limit " + fileSizeLimit,
+                            categories: categories,
+                        });
                         return [2 /*return*/, null];
                     }
                     else if (error) {
-                        res.status(400).send({ error: error });
+                        sendRender(res, 400, {
+                            notification: "" + error,
+                            categories: categories,
+                        });
                         return [2 /*return*/, null];
                     }
                     return [4 /*yield*/, insertProducts(req.body)];
                 case 1:
                     product = _b.sent();
-                    if (buffer instanceof Buffer) {
-                        try {
-                            createImage(buffer, product.ImgName);
-                        }
-                        catch (error) {
-                            res.status(500).send({ error: error });
-                            return [2 /*return*/];
-                        }
-                    }
+                    if (!(buffer instanceof Buffer)) return [3 /*break*/, 5];
+                    _b.label = 2;
+                case 2:
+                    _b.trys.push([2, 4, , 5]);
+                    return [4 /*yield*/, createImage(buffer, product.ImgName)];
+                case 3:
+                    _b.sent();
+                    return [3 /*break*/, 5];
+                case 4:
+                    error_1 = _b.sent();
+                    res.status(500).send({ error: error_1 });
+                    return [2 /*return*/];
+                case 5:
                     sendRender(res, 200, {
                         categories: categories,
                         notification: "Product sucessfully added",
@@ -127,18 +135,26 @@ function sendRender(res, statusCode, renderObject) {
     res.status(statusCode).render("admin/addProduct", __assign({ productsSelected: "text-primary", addProduct: "text-primary", ordersSelected: "text-dark", inquiriesSelected: "text-dark", editDeleteProducts: "text-dark" }, renderObject));
 }
 function createImage(buffer, fileName) {
-    var img = sharp_1.default(buffer);
-    var filePathAndName = "public/imgs/" + fileName;
-    img
-        .resize(1000, 1000, {
-        withoutEnlargement: true,
-        fit: "inside",
-    })
-        .webp()
-        .toFile(filePathAndName, function (err) {
-        if (err) {
-            throw err;
-        }
+    return __awaiter(this, void 0, void 0, function () {
+        var img, filePathAndName, bufferedSharp;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    img = sharp_1.default(buffer);
+                    filePathAndName = "d:/home/" + fileName;
+                    return [4 /*yield*/, img
+                            .resize(1000, 1000, {
+                            withoutEnlargement: true,
+                            fit: "inside",
+                        })
+                            .toFormat("webp")
+                            .toBuffer()];
+                case 1:
+                    bufferedSharp = _a.sent();
+                    fs_1.default.writeFileSync(filePathAndName, bufferedSharp);
+                    return [2 /*return*/];
+            }
+        });
     });
 }
 function insertProducts(insertObject) {

@@ -1,0 +1,37 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  font-size: 4rem;
+}
+
+.nav {
+  margin: 2rem 0rem 0;
+}
+
+.card {
+  border: 0;
+}
+
+img {
+  max-height: 15rem;
+  object-fit: contain;
+}
+
+.btn-link {
+  text-decoration: none;
+}
+
+.container {
+  min-height: 20rem;
+}
+
+#categories > li > a {
+  font-size: 2rem;
+}
+#categories {
+  margin-top: 0;
+}

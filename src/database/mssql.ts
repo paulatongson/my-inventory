@@ -1,7 +1,7 @@
 import sql from "mssql";
 import { readFileSync } from "fs";
 
-const sqlConfig = { 
+const sqlConfig = {
   user: "paulatongson",
   password: "Ivana666tongson",
   database: "artdemic",

@@ -61,7 +61,7 @@ EDIT PRODUCTS BELOW
 
 // this enables the file upload to become a buffer
 const storage = multer.memoryStorage();
-const fileSizeLimit = 1000000; // bytes
+const fileSizeLimit = 5000000; // bytes
 
 const upload = multer({
   storage: storage,
@@ -136,7 +136,7 @@ router.post(
 
       if (buffer instanceof Buffer) {
         try {
-          createImage(buffer, product.ImgName);
+          await createImage(buffer, product.ImgName);
         } catch (error) {
           res.status(500).send({ error: error });
           return;
@@ -172,20 +172,17 @@ function sendRender(
   });
 }
 
-function createImage(buffer: Buffer, fileName: string) {
+async function createImage(buffer: Buffer, fileName: string) {
   const img = sharp(buffer);
-  const filePathAndName = `public/imgs/${fileName}`;
-  img
+  const filePathAndName = `d:/home/${fileName}`;
+  const bufferedSharp = await img
     .resize(1000, 1000, {
       withoutEnlargement: true,
       fit: "inside",
     })
-    .webp()
-    .toFile(filePathAndName, (err) => {
-      if (err) {
-        throw err;
-      }
-    });
+    .toFormat("webp")
+    .toBuffer();
+  fs.writeFileSync(filePathAndName, bufferedSharp);
 }
 
 interface updateProduct {
