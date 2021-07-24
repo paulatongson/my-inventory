@@ -164,7 +164,7 @@ function insertProducts(insertObject) {
             switch (_a.label) {
                 case 0:
                     CategoryID = insertObject.CategoryID, Name = insertObject.Name, Description = insertObject.Description, Price = insertObject.Price, Quantity = insertObject.Quantity;
-                    insertQuery = "\n    INSERT INTO Products(CategoryID, Name, Description, Price, Quantity) \n    VALUES (" + CategoryID + ", '" + Name + "', '" + Description + "', " + Price + ", " + Quantity + ")";
+                    insertQuery = "\n    INSERT INTO Products(CategoryID, Name, Description, Price, Quantity) \n    VALUES (" + CategoryID + ", N'" + Name + "', N'" + Description + "', " + Price + ", " + Quantity + ")";
                     return [4 /*yield*/, mssql_1.exeQuery(insertQuery)];
                 case 1:
                     _a.sent();

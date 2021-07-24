@@ -65,7 +65,7 @@ router.post("/api/cart", function (req, res) { return __awaiter(void 0, void 0, 
             case 0:
                 _a = req.body.contact, ContactName = _a.ContactName, MobileNumber = _a.MobileNumber, EmailAdd = _a.EmailAdd, Address = _a.Address;
                 orders = req.body.orders;
-                return [4 /*yield*/, mssql_1.exeQuery("INSERT INTO Contacts\n  (ContactName, MobileNumber, EmailAdd, Address)\n  VALUES\n  ('" + ContactName + "', '" + MobileNumber + "', '" + EmailAdd + "', '" + Address + "')")];
+                return [4 /*yield*/, mssql_1.exeQuery("INSERT INTO Contacts\n  (ContactName, MobileNumber, EmailAdd, Address)\n  VALUES\n  (N'" + ContactName + "', N'" + MobileNumber + "', N'" + EmailAdd + "', N'" + Address + "')")];
             case 1:
                 createContact = _b.sent();
                 insertContactAffected = createContact.rowsAffected;
@@ -92,7 +92,7 @@ router.post("/api/cart", function (req, res) { return __awaiter(void 0, void 0, 
                 mappedOrders = "(" +
                     orders
                         .map(function (item) {
-                        return newOrderRecord[0].OrderID + ",'" + item.ProductName + "'," + item.Price + "," + item.Quantity;
+                        return newOrderRecord[0].OrderID + ",N'" + item.ProductName + "'," + item.Price + "," + item.Quantity;
                     })
                         .join("),(") +
                     ")";

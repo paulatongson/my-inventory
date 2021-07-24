@@ -113,7 +113,7 @@ async function insertProducts(insertObject: InsertProduct) {
   const { CategoryID, Name, Description, Price, Quantity } = insertObject;
   const insertQuery = `
     INSERT INTO Products(CategoryID, Name, Description, Price, Quantity) 
-    VALUES (${CategoryID}, '${Name}', '${Description}', ${Price}, ${Quantity})`;
+    VALUES (${CategoryID}, N'${Name}', N'${Description}', ${Price}, ${Quantity})`;
   await exeQuery(insertQuery);
 
   // get the inserted product by accessing last item

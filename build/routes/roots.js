@@ -107,7 +107,7 @@ router.post("/", function (req, res) { return __awaiter(void 0, void 0, void 0, 
         switch (_b.label) {
             case 0:
                 _a = req.body, Name = _a.Name, Subject = _a.Subject, MobileNumber = _a.MobileNumber, EmailAdd = _a.EmailAdd, Comments = _a.Comments;
-                return [4 /*yield*/, mssql_1.exeQuery("\n  INSERT INTO  ContactUs ( Name, Subject, MobileNumber, EmailAdd, Comments)  \n  values ('" + Name + "', '" + Subject + "', '" + MobileNumber + "', '" + EmailAdd + "', '" + Comments + "')\n  ")];
+                return [4 /*yield*/, mssql_1.exeQuery("\n  INSERT INTO  ContactUs ( Name, Subject, MobileNumber, EmailAdd, Comments)  \n  values (N'" + Name + "', N'" + Subject + "', N'" + MobileNumber + "', N'" + EmailAdd + "', '" + Comments + "')\n  ")];
             case 1:
                 response = _b.sent();
                 if (response.rowsAffected.length > 0) {

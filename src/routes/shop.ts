@@ -46,7 +46,7 @@ router.post("/api/cart", async (req: RequestBody, res: Response) => {
   const createContact = await exeQuery(`INSERT INTO Contacts
   (ContactName, MobileNumber, EmailAdd, Address)
   VALUES
-  ('${ContactName}', '${MobileNumber}', '${EmailAdd}', '${Address}')`);
+  (N'${ContactName}', N'${MobileNumber}', N'${EmailAdd}', N'${Address}')`);
   const { rowsAffected: insertContactAffected } = createContact;
   if (!insertContactAffected[0]) {
     res.status(400).send({ error: "Failed to Insert Contact" });
@@ -77,7 +77,7 @@ router.post("/api/cart", async (req: RequestBody, res: Response) => {
     `(` +
     orders
       .map((item) => {
-        return `${newOrderRecord[0].OrderID},'${item.ProductName}',${item.Price},${item.Quantity}`;
+        return `${newOrderRecord[0].OrderID},N'${item.ProductName}',${item.Price},${item.Quantity}`;
       })
       .join("),(") +
     `)`;
